@@ -28,64 +28,66 @@ public class Selection {
 
     Selection append(string _shape)
     {
-            	
-                switch(_shape){
-                case "sphere" : createSpheres(); break;
-                // case "g": elements = createG(); break (later)
-                case "path": createPaths(); break;
-                case "line": createLines(); break;
-                case "cube": createCubes(); break;
-                case "cylinder": createRectangles(); break;
-                case "text": createText(); break;
-                case "polygon": createMeshes(); break;
-                case "mesh": createPolygons(); break;
-                default: Console.WriteLine("Shape" + _shape + "does not exist.");
-                        break;
-                }
+        switch(_shape){
+        case "sphere" : createSpheres(); break;
+        // case "g": elements = createG(); break (later)
+        case "path": createPaths(); break;
+        case "line": createLines(); break;
+        case "cube": createCubes(); break;
+        case "cylinder": createRectangles(); break;
+        case "text": createText(); break;
+        case "polygon": createMeshes(); break;
+        case "mesh": createPolygons(); break;
+        default: Console.WriteLine("Shape" + _shape + "does not exist.");break; 
+        }
+    return this;
+    }
+    
+    
 
-        return this;
-}
+    /////////////////////////
+    /// CREATOR FUNCTIONS /// 
+    /////////////////////////
 
-private void createPolygons()
-{
- 	throw new NotImplementedException();
-}
 
-private void createMeshes()
-{
- 	throw new NotImplementedException();
-}
+    private void createPolygons()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createText()
-{
- 	throw new NotImplementedException();
-}
+    private void createMeshes()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createRectangles()
-{
- 	throw new NotImplementedException();
-}
+    private void createText()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createCubes()
-{
- 	throw new NotImplementedException();
-}
+    private void createRectangles()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createLines()
-{
- 	throw new NotImplementedException();
-}
+    private void createCubes()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createPaths()
-{
- 	throw new NotImplementedException();
-}
+    private void createLines()
+    {
+        throw new NotImplementedException();
+    }
 
-private void createSpheres()
-{
- 	throw new NotImplementedException();
-}     
-           }
+    private void createPaths()
+    {
+        throw new NotImplementedException();
+    }
 
+    private void createSpheres()
+    {
+        throw new NotImplementedException();
+    }     
 
 }
