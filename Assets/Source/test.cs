@@ -24,11 +24,11 @@ public class test : MonoBehaviour {
 		List<DataElement> data = initData();		
 
 		// Create rectangles
-        Selection s = d4.selectAll()
-            .data(data)
-            .append("sphere")
-                .attr("x", (d, i) => { return d.age; })
-                .attr("y", (d, i) => { return d.weight; });
+        //Selection s = d4.selectAll()
+        //    .data(data)
+        //    .append("sphere")
+        //        .attr("x", (d, i) => { return d.age; })
+              //  .attr("y", (d, i) => { return d.weight; });
 
 	}
 	
