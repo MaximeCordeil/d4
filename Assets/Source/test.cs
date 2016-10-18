@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class test : MonoBehaviour {
 
-	public DataElement{
+	public class DataElement{
 		string name;
 		string gender;
 		int age;
