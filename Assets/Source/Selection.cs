@@ -91,6 +91,7 @@ public class Selection {
 		case "y": setPosY(visualObject, Convert.ToSingle(val)); break;
 		case "z": setPosZ(visualObject, Convert.ToSingle(val)); break;                           
 		case "r": visualObject.transform.localScale = new Vector3(Convert.ToSingle(val), Convert.ToSingle(val), Convert.ToSingle(val)); break;                           
+		case "scale": visualObject.transform.localScale = new Vector3(Convert.ToSingle(val), Convert.ToSingle(val), Convert.ToSingle(val)); break;                           
         }
     }
 	private void setPosX(GameObject visualObject, float val)
@@ -98,7 +99,6 @@ public class Selection {
         var pos = visualObject.transform.position;
         pos.x = val;
         visualObject.transform.position = pos;
-
     }
 	private void setPosY(GameObject visualObject, float val)
     {
