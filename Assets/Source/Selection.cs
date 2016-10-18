@@ -18,6 +18,7 @@ public class Selection {
 
     UnityEngine.PrimitiveType shape;
 
+    /// Binds data obejcts to indices
     Selection data(Object[] objects)
     {
         dataElements = objects;
@@ -25,6 +26,7 @@ public class Selection {
         return this;
     }
 
+    /// Binds data obejcts to indices
     Selection data(List<Object> objects)
     {
         dataElements = new List<Object>(objects);

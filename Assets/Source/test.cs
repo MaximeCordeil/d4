@@ -28,6 +28,7 @@ public class test : MonoBehaviour {
 			.append("sphere")
 				.attr("x", (d,i)=>{ return d.age; })
 				.attr("y", (d,i)=>{ return d.weight; })
+				.style("fill", "#ff0000")
 
 	}
 	
