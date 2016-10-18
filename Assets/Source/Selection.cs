@@ -4,6 +4,8 @@ using System;
 
 public class Selection {
 
+    float DEFAULT_PRIMITIVE_SIZE = 0.01f;
+
     List<Object> dataElements = new List<Object>();
     List<Object> filteredDataElements = new List<Object>();
     List<UnityEngine.GameObject> visualElements = new List<UnityEngine.GameObject>();
@@ -70,9 +72,33 @@ public class Selection {
         throw new NotImplementedException();
     }
 
+    private void createRectangle()
+    {
+        for (int i = 0; i < filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Cube);
+            //scales it down to 1cm
+            go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+            UnityEngine.Vector3 _scale = go.transform.localScale;
+            _scale.z = 0f;
+            go.transform.localScale = _scale;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
+    }
+
     private void createCubes()
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Cube);
+            //scales it down to 1cm
+            go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
     }
 
     private void createLines()
@@ -87,7 +113,31 @@ public class Selection {
 
     private void createSpheres()
     {
-        throw new NotImplementedException();
-    }     
+        for (int i=0; i< filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Sphere);
+            //scales it down to 1cm
+            go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
+    }
 
+    private void createCircle()
+    {
+        for (int i = 0; i < filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Sphere);
+            //scales it down to 1cm
+            go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+            //flatten z to create a disc
+            UnityEngine.Vector3 _scale = go.transform.localScale;
+            _scale.z = 0f;
+            go.transform.localScale = _scale;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
+    }     
 }
