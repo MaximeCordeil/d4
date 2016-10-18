@@ -50,6 +50,7 @@ public class Selection {
             case "path": createPaths(); break;
             case "line": createLines(); break;
             case "cube": createCubes(); break;
+            case "3dline": create3DLines(); break;
             case "rectangle": createRectangles(); break;
             case "cylinder": createCylinder(); break;
             case "text": createText(); break;
@@ -89,6 +90,7 @@ public class Selection {
 		case "x": setPosX (visualObject, Convert.ToSingle(val)); break;
 		case "y": setPosY(visualObject, Convert.ToSingle(val)); break;
 		case "z": setPosZ(visualObject, Convert.ToSingle(val)); break;                           
+		case "r": visualObject.transform.localScale = new Vector3(Convert.ToSingle(val), Convert.ToSingle(val), Convert.ToSingle(val)); break;                           
         }
     }
 	private void setPosX(GameObject visualObject, float val)
@@ -204,13 +206,12 @@ public class Selection {
 			//scales it down to 1cm
 			go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
 			UnityEngine.Vector3 _scale = go.transform.localScale;
-			_scale.y = DEFAULT_PRIMITIVE_SIZE*2f;
+			_scale.y = DEFAULT_PRIMITIVE_SIZE * 2f;
 			go.transform.localScale = _scale;
 			//add the created GameObject to the visual elements
 			visualElements.Add(go);
 		}
 	}
-
 
     private void createPolygons()
     {
@@ -260,18 +261,31 @@ public class Selection {
         }
     }
 
+    private void create3DLines()
+    {
+        for (int i = 0; i < filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Cylinder);
+            //scales it down to 1cm
+            go.transform.localScale *= .1f;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
+    }
+
     private void createLines()
     {
-//        for (int i = 0; i < filteredDataElements.Count; i++)
-//        {
-//            //creates a default sphere
-//            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.LineRenderer);
-//            //scales it down to 1cm
-//            go.SetWidth(DEFAULT_LINE_THICKNESS, DEFAULT_LINE_THICKNESS);
-//            // go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
-//            //add the created GameObject to the visual elements
-//            visualElements.Add(go);
-//        }
+    //    for (int i = 0; i < filteredDataElements.Count; i++)
+    //    {
+    //        //creates a default sphere
+    //        UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.LineRenderer);
+    //        //scales it down to 1cm
+    //        go.SetWidth(DEFAULT_LINE_THICKNESS, DEFAULT_LINE_THICKNESS);
+    //        // go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+    //        //add the created GameObject to the visual elements
+    //        visualElements.Add(go);
+    //    }
     }
 
     private void createPaths()

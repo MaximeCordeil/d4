@@ -17,8 +17,17 @@ public class test : MonoBehaviour {
 			.append ("sphere")
 				.attr ("x", (d, i) => d.age / 10f)
 				.attr ("y", (d, i) => d.weight / 10f)
+				.attr ("r", (d, i) => d.weight / 10f)
 				.style("fill", new float[]{1f,0f,0f})
 				.style("opacity", .1f);
+
+		// Selection s1 = d4.selectAll ()
+		// 	.data (data)
+		// 	.append ("3dline")
+		// 		.attr ("x", (d, i) => d.age / 10f)
+		// 		.attr ("y", (d, i) => d.weight / 10f)
+		// 		.style("fill", new float[]{1f,0f,0f})
+		// 		.style("opacity", .8f);
 	
 	}
 
