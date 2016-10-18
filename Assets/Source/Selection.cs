@@ -17,13 +17,15 @@ public class Selection {
     Delegate clickHandler;
 
     UnityEngine.PrimitiveType shape;
-
-    Selection data(Object[] objects)
-    {
-        dataElements = objects;
-        filteredDataElements = objects;s
-        return this;
-    }
+    
+    ///TODO: handle Objects arrays
+    ///
+    //Selection data(Object[] objects)
+    //{
+    //    dataElements = objects;
+    //    filteredDataElements = objects;
+    //    return this;
+    //}
 
     Selection data(List<Object> objects)
     {
@@ -40,13 +42,30 @@ public class Selection {
         case "path": createPaths(); break;
         case "line": createLines(); break;
         case "cube": createCubes(); break;
-        case "cylinder": createRectangles(); break;
+        case "rectangle": createRectangles(); break;
+        case "cylinder": createCylinder(); break;
         case "text": createText(); break;
         case "polygon": createMeshes(); break;
         case "mesh": createPolygons(); break;
         default: Console.WriteLine("Shape" + _shape + "does not exist.");break; 
         }
     return this;
+    }
+
+    private void createCylinder()
+    {
+        for (int i = 0; i < filteredDataElements.Count; i++)
+        {
+            //creates a default sphere
+            UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Cylinder);
+            //scales it down to 1cm
+            go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
+            UnityEngine.Vector3 _scale = go.transform.localScale;
+            _scale.y = DEFAULT_PRIMITIVE_SIZE*2f;
+            go.transform.localScale = _scale;
+            //add the created GameObject to the visual elements
+            visualElements.Add(go);
+        }
     }
     
     
@@ -58,9 +77,8 @@ public class Selection {
 
     private void createPolygons()
     {
-        throw new NotImplementedException();
     }
-
+    
     private void createMeshes()
     {
         throw new NotImplementedException();
@@ -144,5 +162,7 @@ public class Selection {
             //add the created GameObject to the visual elements
             visualElements.Add(go);
         }
-    }     
+    }
+
+
 }
