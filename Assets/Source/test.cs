@@ -1,38 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-namespace Test{
 public class test : MonoBehaviour {
-
-	public class DataObject{
-		public static string name;
-		public static string gender;
-		public static int age;
-		public static int weight;
-
-		public DataObject(string name, string gender, int age, int weight){
-			this.name = name; 
-			this.gender = gender;
-			this.age = age;
-			this.weight = weight;
-		}
-	}
 
 	// Use this for initialization
 	void Start () {
 
 		List<DataObject> data = initData();		
-
+		Func<DataObject,int,System.Object> myfun = (d, i) => d.age;
+		
 		// Create rectangles
-		Selection s = d4.selectAll ()
+		Selection s1 = d4.selectAll ()
 			.data (data)
 			.append ("sphere")
-				.attr ("x", (d, i) => { return (DataObject)d.age; })
-				.attr ("y", (d, i) => { return (DataObject)d.weight; });
-				// .style("fill", "#
-	}
+				.attr ("x", (d, i) => d.age / 10)
+				.attr ("y", (d, i) => d.weight / 10);
 	
+		Selection s2 = d4.selectAll ()
+			.data (data)
+			.append ("cube")
+				.attr ("x", (d, i) => d.age / 20)
+				.attr ("y", (d, i) => d.weight / 20);
+	
+	}
+		
 	// Update is called once per frame
 	void Update () {
 	
@@ -41,12 +34,21 @@ public class test : MonoBehaviour {
 
 	List<DataObject> initData(){
 		List<DataObject> data = new List<DataObject>();
-		data.Add(new DataObject("Arno", "m", 25, 73));
-		data.Add(new DataObject("Bea", "f", 23, 53));
-		data.Add(new DataObject("Christophe", "m", 37, 71));
-		data.Add(new DataObject("Denver", "m", 53, 97));
-		data.Add(new DataObject("Eva", "f", 53, 98));		
+		DataObject dObj = new DataObject();
+		dObj.name = "A";
+		dObj.gender = "m"; 
+		dObj.age = 20;
+		dObj.weight = 100; 
+		data.Add(dObj);				
+
+		dObj = new DataObject();
+		dObj.name = "B";
+		dObj.gender = "f"; 
+		dObj.age = 30;
+		dObj.weight = 120; 
+		data.Add(dObj);				
+
 		return data;
 	}
-}
+
 }

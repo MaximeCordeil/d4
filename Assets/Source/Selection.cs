@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using Test;
 
 public class Selection {
 
-    float DEFAULT_PRIMITIVE_SIZE = 0.01f;
+    // float DEFAULT_PRIMITIVE_SIZE = 0.01f;
+    // float DEFAULT_LINE_THICKNESS = 0.001f;
+    float DEFAULT_PRIMITIVE_SIZE = 1f;
     float DEFAULT_LINE_THICKNESS = 0.001f;
 
-	List<test.DataObject> dataElements = new List<test.DataObject>();
-	List<test.DataObject> filteredDataElements = new List<test.DataObject>();
+	List<DataObject> dataElements = new List<DataObject>();
+	List<DataObject> filteredDataElements = new List<DataObject>();
     List<UnityEngine.GameObject> visualElements = new List<UnityEngine.GameObject>();
     Delegate overHandler ;
     Delegate moveHandler;
@@ -32,10 +33,11 @@ public class Selection {
     //}
 
     /// Binds data obejcts to indices
-	public Selection data(List<test.DataObject> objects)
+	public Selection data(List<DataObject> objects)
     {
-		dataElements = new List<test.DataObject>(objects);
-		filteredDataElements = new List<test.DataObject>(objects);
+
+		dataElements = new List<DataObject>(objects);
+		filteredDataElements = new List<DataObject>(objects);
         return this;
     }
 
@@ -71,7 +73,7 @@ public class Selection {
         }
 		return this;
     }
-	public Selection attr(string attributeName, Func<System.Object,int,System.Object> func)
+	public Selection attr(string attributeName, Func<DataObject,int,System.Object> func)
     {
 		for(int i=0 ; i<this.dataElements.Count ; i++){
 			System.Object val = func (this.dataElements [i], i);
@@ -82,11 +84,10 @@ public class Selection {
 	private void setAttr(string attributeName, System.Object val, GameObject visualObject)
     {
         switch(attributeName){
-		case "x": setPosX (visualObject, (float) val); break;
-		case "y": setPosY(visualObject, (float) val); break;
-		case "z": setPosZ(visualObject, (float) val); break;                           
+		case "x": setPosX (visualObject, Convert.ToSingle(val)); break;
+		case "y": setPosY(visualObject, Convert.ToSingle(val)); break;
+		case "z": setPosZ(visualObject, Convert.ToSingle(val)); break;                           
         }
-
     }
 	private void setPosX(GameObject visualObject, float val)
     {
@@ -106,6 +107,63 @@ public class Selection {
         var pos = visualObject.transform.position;
         pos.z = val;
         visualObject.transform.position = pos;
+    }
+
+
+    public Selection attr(string attributeName, System.Object val )
+    {
+		for(int i = 0 ; i < this.dataElements.Count; i++ )
+        {
+			setAttr (attributeName, val, this.visualElements [i]);
+        }
+		return this;
+    }
+    public Selection style(string attributeName, Func<DataObject,int,System.Object> func)
+    {
+		for(int i=0 ; i<this.dataElements.Count ; i++){
+			System.Object val = func (this.dataElements [i], i);
+			setStyle(attributeName, val, this.visualElements[i]);
+        }
+		return this;
+    }
+    
+	private void setStyle(string attributeName, var val, GameObject visualObject)
+    {
+        switch(attributeName){
+		case "fill": visualObject.renderer.material.color.r = Convert.ToSingle(val[0]);
+					visualObject.renderer.material.color.g = Convert.ToSingle(val[1]);
+					visualObject.renderer.material.color.b = Convert.ToSingle(val[2]); 
+			break;
+		case "opacity": visualObject.renderer.material.color.a = Convert.ToSingle(val); break;
+        }
+    }
+
+    public Selection attr(string attributeName, float[] val )
+    {
+		for(int i = 0 ; i < this.dataElements.Count; i++ )
+        {
+			setAttr (attributeName, val, this.visualElements [i]);
+        }
+		return this;
+    }
+    public Selection style(string attributeName, Func<DataObject,int,float[]> func)
+    {
+		for(int i=0 ; i<this.dataElements.Count ; i++){
+			System.Object val = func (this.dataElements [i], i);
+			setStyle(attributeName, val, this.visualElements[i]);
+        }
+		return this;
+    }
+    
+	private void setStyle(string attributeName, float[] val, GameObject visualObject)
+    {
+        switch(attributeName){
+		case "fill": visualObject.renderer.material.color.r = Convert.ToSingle(val[0]);
+					visualObject.renderer.material.color.g = Convert.ToSingle(val[1]);
+					visualObject.renderer.material.color.b = Convert.ToSingle(val[2]); 
+			break;
+		case "opacity": visualObject.renderer.material.color.a = Convert.ToSingle(val); break;
+        }
     }
     
 
@@ -203,9 +261,9 @@ public class Selection {
 
     private void createSpheres()
     {
-
-        for (int i=0; i< filteredDataElements.Count; i++)
+        for (int i=0; i < filteredDataElements.Count; i++)
         {
+            Debug.Log("Create Sphere");
             //creates a default sphere
             UnityEngine.GameObject go = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Sphere);
             //scales it down to 1cm
