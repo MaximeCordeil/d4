@@ -18,11 +18,15 @@ public class Selection {
 
     Selection data(Object[] objects)
     {
+        dataElements = objects;
+        filteredDataElements = objects;s
         return this;
     }
 
     Selection data(List<Object> objects)
     {
+        dataElements = new List<Object>(objects);
+        filteredDataElements = new List<Object>(objects);
         return this;
     }
 
@@ -87,7 +91,7 @@ public class Selection {
 
     private void createSpheres()
     {
-        throw new NotImplementedException();
+        
     }     
 
 }
