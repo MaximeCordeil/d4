@@ -63,7 +63,9 @@ public class Selection {
         return this;
     }
 
-  
+ 
+
+	// ATTR
 
 	public Selection attr(string attributeName, System.Object val )
     {
@@ -110,11 +112,14 @@ public class Selection {
     }
 
 
-    public Selection attr(string attributeName, System.Object val )
+
+	// STYLE
+
+    public Selection style(string attributeName, System.Object val )
     {
 		for(int i = 0 ; i < this.dataElements.Count; i++ )
         {
-			setAttr (attributeName, val, this.visualElements [i]);
+			setStyle (attributeName, val, this.visualElements [i]);
         }
 		return this;
     }
@@ -127,22 +132,23 @@ public class Selection {
 		return this;
     }
     
-	private void setStyle(string attributeName, var val, GameObject visualObject)
+	private void setStyle(string attributeName, System.Object val, GameObject visualObject)
     {
         switch(attributeName){
-		case "fill": visualObject.renderer.material.color.r = Convert.ToSingle(val[0]);
-					visualObject.renderer.material.color.g = Convert.ToSingle(val[1]);
-					visualObject.renderer.material.color.b = Convert.ToSingle(val[2]); 
+		case "opacity"  : 
+            setTranparent(visualObject);
+			Color color = visualObject.GetComponent<Renderer> ().material.color;
+			color.a = Convert.ToSingle (val);
+			visualObject.GetComponent<Renderer> ().material.color = color;
 			break;
-		case "opacity": visualObject.renderer.material.color.a = Convert.ToSingle(val); break;
         }
     }
 
-    public Selection attr(string attributeName, float[] val )
+    public Selection style(string attributeName, float[] val )
     {
 		for(int i = 0 ; i < this.dataElements.Count; i++ )
         {
-			setAttr (attributeName, val, this.visualElements [i]);
+			setStyle (attributeName, val, this.visualElements [i]);
         }
 		return this;
     }
@@ -158,12 +164,26 @@ public class Selection {
 	private void setStyle(string attributeName, float[] val, GameObject visualObject)
     {
         switch(attributeName){
-		case "fill": visualObject.renderer.material.color.r = Convert.ToSingle(val[0]);
-					visualObject.renderer.material.color.g = Convert.ToSingle(val[1]);
-					visualObject.renderer.material.color.b = Convert.ToSingle(val[2]); 
+		case "fill": 
+			visualObject.GetComponent<Renderer>().material.color=new Color(val[0],val[1], val[2]);
 			break;
-		case "opacity": visualObject.renderer.material.color.a = Convert.ToSingle(val); break;
-        }
+	    }
+    }
+
+    
+    // setting shader transparent
+    private void setTranparent(GameObject go){
+            MeshRenderer renderer = go.GetComponent<MeshRenderer>();
+            Material material = renderer.material;
+            
+            material.SetFloat("_Mode", 4f);
+            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetInt("_ZWrite", 0);
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.EnableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.renderQueue = 3000;
     }
     
 
@@ -270,8 +290,10 @@ public class Selection {
             go.transform.localScale *= DEFAULT_PRIMITIVE_SIZE;
             //add the created GameObject to the visual elements
             visualElements.Add(go);
+
         }
     }
+
 
     private void createCircle()
     {

@@ -15,20 +15,15 @@ public class test : MonoBehaviour {
 		Selection s1 = d4.selectAll ()
 			.data (data)
 			.append ("sphere")
-				.attr ("x", (d, i) => d.age / 10)
-				.attr ("y", (d, i) => d.weight / 10);
-	
-		Selection s2 = d4.selectAll ()
-			.data (data)
-			.append ("cube")
-				.attr ("x", (d, i) => d.age / 20)
-				.attr ("y", (d, i) => d.weight / 20);
+				.attr ("x", (d, i) => d.age / 10f)
+				.attr ("y", (d, i) => d.weight / 10f)
+				.style("fill", new float[]{1f,0f,0f})
+				.style("opacity", .1f);
 	
 	}
-		
+
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 
