@@ -4,3 +4,4 @@ ProjectSettings/
 *.csproj
 *.sln
 *.suo
+Temp/
