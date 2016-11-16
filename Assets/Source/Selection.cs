@@ -23,7 +23,7 @@ public class Selection {
     // visual primitive for this selection
     string shape;
 
-    ///TODO: handle Objects arrays
+    ///TODO: handle Objects arrays, instead of lists
     ///
     //Selection data(Object[] objects)
     //{

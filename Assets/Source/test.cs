@@ -8,9 +8,12 @@ public class test : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
 		List<DataObject> data = initData();		
 		Func<DataObject,int,System.Object> myfun = (d, i) => d.age;
-		
+
+		Debug.Log("[Test] Start");
+
 		// Create rectangles
 
 		Selection s1 = d4.selectAll ()
@@ -37,7 +40,9 @@ public class test : MonoBehaviour {
 	}
 
 
-	List<DataObject> initData(){
+	List<DataObject> initData()
+	{
+		
 		List<DataObject> data = new List<DataObject>();
 		DataObject dObj = new DataObject();
 		dObj.name = "A";

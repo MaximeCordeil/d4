@@ -12,7 +12,7 @@ public class d4: MonoBehaviour {
         DataLoader.DataObject do_ = new DataLoader.DataObject();
         Debug.Log(do_.loadCSV(myFile.text));
    
-      //  loadCSV(myFile.text);
+    //    loadCSV(myFile.text);
     }
 
     //void loadCSV(string data)
@@ -70,7 +70,6 @@ public class d4: MonoBehaviour {
 
     string createClass(string[] ids, string[] typeFields)
     {
-        
         string classCompile =
             @"using System;
               
